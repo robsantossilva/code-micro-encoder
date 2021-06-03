@@ -23,7 +23,7 @@ func init() {
 
 func prepare() (*domain.Video, repositories.VideoRepository) {
 	db := database.NewDbTest()
-	defer db.Close()
+	//defer db.Close()
 
 	video := domain.NewVideo()
 	video.ID = uuid.NewV4().String()
@@ -59,4 +59,18 @@ func TestVideoServiceDownload(t *testing.T) {
 	err = videoService.Finish()
 	require.Nil(t, err)
 
+}
+
+func TestVideoServiceInsertVideo(t *testing.T) {
+
+	var err error
+
+	video, repo := prepare()
+
+	videoService := services.NewVideoService()
+	videoService.Video = video
+	videoService.VideoRepository = repo
+
+	err = videoService.InsertVideo()
+	require.Nil(t, err)
 }

@@ -46,7 +46,7 @@ func TestVideoServiceUpload(t *testing.T) {
 	videoUpload.VideoPath = os.Getenv("localStoragePath") + "/6fab542f-10ca-43a1-9f44-b0fa7c4eb27b"
 
 	doneUpload := make(chan string)
-	go videoUpload.ProcessUpload(50, doneUpload)
+	go videoUpload.ProcessUpload(4, doneUpload)
 
 	result := <-doneUpload
 	require.Equal(t, "Upload completed", result)
